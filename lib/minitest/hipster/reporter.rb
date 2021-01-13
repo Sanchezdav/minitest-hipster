@@ -1,0 +1,30 @@
+require 'minitest'
+
+module Minitest
+  module Hipster
+    class Reporter < Minitest::StatisticsReporter
+      attr_accessor :all_results
+
+      def initialize(io = $stdout, options = {})
+        super
+        all_results = []
+      end
+
+      def record(result)
+        super
+        all_results << result
+      end
+
+      def report
+        super
+        @report = Report.new(self)
+        @report.write
+      end
+
+      def passed?
+        super
+        io.puts "Wrote HTML test report to #{ @report.url }"
+      end
+    end
+  end
+end

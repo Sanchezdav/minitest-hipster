@@ -1,8 +1,4 @@
-require "minitest/hipster/version"
+require 'minitest/hipster_plugin'
 
-module Minitest
-  module Hipster
-    class Error < StandardError; end
-    # Your code goes here...
-  end
-end
+Minitest.load_plugins
+Minitest::Hipster.enable!
